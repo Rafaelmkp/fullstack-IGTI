@@ -384,20 +384,6 @@
       "type": "Desafio",
       "value": 45,
       "timestamp": "2020-05-19T18:21:25.284Z"
-    },
-    {
-      "student": "João da Silva",
-      "subject": "matemática",
-      "type": "trabalho",
-      "value": 44.5,
-      "id": {
-        "id": 49,
-        "student": "João da Silva",
-        "subject": "matemática",
-        "type": "trabalho",
-        "value": 44.5,
-        "timestamp": 1611017070690
-      }
     }
   ]
 }

@@ -10,7 +10,6 @@ router.post('/new-grade', async (req, res, next) => {
   try {
     let newGrade = req.body;
 
-    //need test
     if (
       !newGrade.student ||
       !newGrade.subject ||
@@ -21,7 +20,7 @@ router.post('/new-grade', async (req, res, next) => {
     }
     const data = JSON.parse(await readFile(global.fileGrades));
     //Manually spreading array prevents from getting undesired body data
-    newGrade.id = {
+    newGrade = {
       id: data.nextId,
       student: newGrade.student,
       subject: newGrade.subject,
@@ -39,6 +38,7 @@ router.post('/new-grade', async (req, res, next) => {
   }
 });
 
+//Activity 2
 router.put('/update-grade', async (req, res, next) => {
   try {
     let params = req.body;
@@ -73,6 +73,7 @@ router.put('/update-grade', async (req, res, next) => {
   }
 });
 
+//Activity 3
 router.delete('/delete-grade/:id', async (req, res, next) => {
   try {
     const data = JSON.parse(await readFile(global.fileGrades));
@@ -94,6 +95,7 @@ router.delete('/delete-grade/:id', async (req, res, next) => {
   }
 });
 
+//Activity 4
 router.get('/:id', async (req, res, next) => {
   try {
     const data = JSON.parse(await readFile(global.fileGrades));
@@ -113,7 +115,29 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.get('/final-grade/:student/:subject');
+//Activity 5
+router.get('/final-grade/:student/:subject', async (req, res, next) => {
+  try {
+    const data = JSON.parse(await readFile(global.fileGrades));
+    //treated string values for better comparing
+    const student = req.params.student.toLowerCase();
+    const subject = req.params.subject.toLowerCase();
+
+    const aimedGrades = data.grades.filter((grade) => {
+      const gradeSubject = grade.subject.toLowerCase().split(' ');
+      //presumably subject will always be "00 - xxxxx"
+      const gradeStudent = grade.student.toLowerCase().replace(' ', '-');
+      if (gradeSubject[2] === subject && gradeStudent === student) return grade;
+    });
+
+    const totalValue = aimedGrades.reduce((acc, curr) => acc + curr.value, 0);
+
+    const strRespond = `${student} - ${subject}: ${totalValue}`;
+    res.send(strRespond);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.use((err, req, res, next) => {
   global.logger.error(`${req.method} ${req.baseUrl} ${err.message}`);
