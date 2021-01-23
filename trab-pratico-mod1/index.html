@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Trab Prattico - Mod1 IGTI</title>
+  </head>
+  <body>
+    <div>
+      <div class="container-form">
+        <div class="container-column" id="labs">
+          <label for="rInput">(R) Vermelho:</label>
+          <label for="gInput">(G) Verde:</label>
+          <label for="bInput">(B) Blue:</label>
+        </div>
+        <div class="container-column" id="ranges">
+          <input type="range" id="red" name="rInput" min="0" max="255" />
+          <input type="range" id="green" name="gInput" min="0" max="255" />
+          <input type="range" id="blue" name="bInput" min="0" max="255" />
+          <div id="container-block"></div>
+        </div>
+        <div class="container-column" id="txts">
+          <input type="text" id="red-text" disabled />
+          <input type="text" id="green-text" disabled />
+          <input type="text" id="blue-text" disabled />
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

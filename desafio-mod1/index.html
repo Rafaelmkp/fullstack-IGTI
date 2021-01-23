@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./materialize.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Mod 1 - Desafio</title>
+  </head>
+  <body>
+    <h1>Pesquisa de usuários</h1>
+    <div>
+    <label for="search"></label>
+      <input type="text" placeholder="Busca" id="search"
+    /></label>
+    <input type="button" class="waves-effect waves-light btn" id="search-btn" value="Buscar" />
+    </div>
+    <div>
+      <div class="results" id="users">
+        <h2 id="results-title">Nenhum usuário filtrado</h2>
+        <ul class="results-list" id="results-data"></ul>
+      </div>
+      <div class="results" id="statistics">
+        <h2 id="statistics-title">Nada a ser exibido</h2>
+        <ul class="results-list" id="statistics-data"></ul>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
