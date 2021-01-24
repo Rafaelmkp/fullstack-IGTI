@@ -139,6 +139,71 @@ router.get('/final-grade/:student/:subject', async (req, res, next) => {
   }
 });
 
+//Activity 6
+/**
+ * Since its kown there is only 3 types of grades,
+ * its possible to search for the first letter
+ * This is for performance reasons
+ * Different types may require regex for accentuated chars
+ */
+router.get('/avg-grade/:subject/:type', async (req, res, next) => {
+  try {
+    const data = JSON.parse(await readFile(global.fileGrades));
+
+    const subject = req.params.subject.toLowerCase();
+    const type = req.params.type.toLowerCase().charAt(0);
+
+    const aimedGrades = data.grades.filter((grade) => {
+      const gradeSubject = grade.subject.toLowerCase().split(' ');
+      if (
+        gradeSubject[2].toLowerCase() === subject &&
+        grade.type.toLowerCase().charAt(0) === type
+      ) {
+        return grade;
+      }
+    });
+
+    const avgGrade =
+      aimedGrades.reduce((sum, value) => {
+        return sum + value;
+      }, 0) / aimedGrades.length;
+
+    res.send(avgGrade);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//Activity 7
+router.get('/best-grades/:subject/:type', async (req, res, next) => {
+  try {
+    const subject = req.params.subject.toLowerCase();
+    const type = req.params.type.toLowerCase().charAt(0);
+
+    const data = JSON.parse(await readFile(global.fileGrades));
+
+    const aimedGrades = data.grades.filter((grade) => {
+      const gradeSubject = grade.subject.toLowerCase().split(' ');
+      if (
+        gradeSubject[2].toLowerCase() === subject &&
+        grade.type.toLowerCase().charAt(0) === type
+      ) {
+        return grade;
+      }
+    });
+
+    aimedGrades.sort((a, b) => {
+      return b.value - a.value;
+    });
+
+    console.log(aimedGrades);
+    const threeBestGrades = [aimedGrades[0], aimedGrades[1], aimedGrades[2]];
+    res.send(threeBestGrades);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.use((err, req, res, next) => {
   global.logger.error(`${req.method} ${req.baseUrl} ${err.message}`);
   res.status(400).send({ error: err.message });
