@@ -6,7 +6,7 @@ export default function FormInput({
   min,
   step,
   labelDesc,
-  value,
+  // value,
   onChange,
 }) {
   const handleChange = (event) => {
@@ -23,6 +23,7 @@ export default function FormInput({
         min={min}
         step={step}
         onChange={handleChange}
+        // value={value ? value : ''}
       />
       <label className='active' htmlFor={id}>
         {labelDesc}

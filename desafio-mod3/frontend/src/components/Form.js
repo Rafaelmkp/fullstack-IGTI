@@ -6,22 +6,12 @@ export default function Form({ onChangeForm }) {
   const [rate, setRate] = useState();
   const [term, setTerm] = useState();
 
-  useEffect(() => {}, []);
+  //tentar novamente handleFormChange s/ useEffect
 
-  const handleCapitalChange = (value) => {
-    setCapital(value);
+  useEffect(() => {
     onChangeForm([capital, rate, term]);
-  };
-
-  const handleRateChange = (value) => {
-    setRate(value);
-    onChangeForm([capital, rate, term]);
-  };
-
-  const handleTermChange = (value) => {
-    setTerm(value);
-    onChangeForm([capital, rate, term]);
-  };
+    console.log(`${capital}, ${rate}, ${term}`);
+  }, [capital, rate, term, onChangeForm]);
 
   return (
     <form className='col s12'>
@@ -33,8 +23,8 @@ export default function Form({ onChangeForm }) {
             min='0'
             step='1'
             labelDesc='Capital inicial:'
-            onChange={handleCapitalChange}
-            value={capital}
+            onChange={setCapital}
+            // value={capital}
           />
           <FormInput
             placeholder='Taxa de juros'
@@ -42,7 +32,8 @@ export default function Form({ onChangeForm }) {
             min=''
             step='0.1'
             labelDesc='Taxa de juros mensal:'
-            onChange={handleRateChange}
+            onChange={setRate}
+            // value={rate}
           />
           <FormInput
             placeholder='Período'
@@ -50,7 +41,8 @@ export default function Form({ onChangeForm }) {
             min='0'
             step='1'
             labelDesc='Período(meses):'
-            onChange={handleTermChange}
+            onChange={setTerm}
+            // value={term}
           />
         </div>
       </div>

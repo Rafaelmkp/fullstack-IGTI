@@ -3,19 +3,28 @@ import Form from './components/Form';
 import InstallmentGroup from './components/InstallmentGroup';
 
 export default function App() {
-  const [capital, setCapital] = useState();
-  const [rate, setRate] = useState();
-  const [term, setTerm] = useState();
+  const [capital, setCapital] = useState(0);
+  const [rate, setRate] = useState(0);
+  const [term, setTerm] = useState(0);
 
-  useEffect(() => {
-    setCapital(0);
-    setRate(0);
-    setTerm(0);
-  }, []);
+  // useEffect(() => {
+  //   setCapital(0);
+  //   setRate(0);
+  //   setTerm(0);
+  // }, []);
+
+  // useEffect((params) => {
+  //   setCapital(params[0]);
+  //   setRate(params[1]);
+  //   setTerm(params[2]);
+  //   console.log(params);
+  // }, []);
 
   const handleFormChange = (params) => {
-    // console.log(parameters);
-    console.log(params);
+    setCapital(params[0]);
+    setRate(params[1]);
+    setTerm(params[2]);
+    // console.log(`${capital}, ${rate}, ${term}`);
   };
 
   return (
