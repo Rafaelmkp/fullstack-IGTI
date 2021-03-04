@@ -1,30 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Form from './components/Form';
 import InstallmentGroup from './components/InstallmentGroup';
 
 export default function App() {
   const [capital, setCapital] = useState(0);
-  const [rate, setRate] = useState(0);
+  const [intRate, setIntRate] = useState(0);
   const [term, setTerm] = useState(0);
 
-  // useEffect(() => {
-  //   setCapital(0);
-  //   setRate(0);
-  //   setTerm(0);
-  // }, []);
-
-  // useEffect((params) => {
-  //   setCapital(params[0]);
-  //   setRate(params[1]);
-  //   setTerm(params[2]);
-  //   console.log(params);
-  // }, []);
-
-  const handleFormChange = (params) => {
-    setCapital(params[0]);
-    setRate(params[1]);
-    setTerm(params[2]);
-    // console.log(`${capital}, ${rate}, ${term}`);
+  const handleFormChange = (newCap, newIntRate, newTerm) => {
+    if (newCap !== null) {
+      setCapital(newCap);
+      return;
+    }
+    if (newIntRate !== null) {
+      setIntRate(newIntRate);
+      return;
+    }
+    setTerm(newTerm);
   };
 
   return (
@@ -33,12 +25,15 @@ export default function App() {
       <Form style={style.flexChild} onChangeForm={handleFormChange} />
       <InstallmentGroup
         style={style.flexChild}
-        cashFlow={[capital, rate, term]}
+        cashFlow={(capital, intRate, term)}
       />
     </div>
   );
 }
 
+/**
+ * >>STYLE<<
+ */
 const style = {
   flex: {
     display: 'flex',
