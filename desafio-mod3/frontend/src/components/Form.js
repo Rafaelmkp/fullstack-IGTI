@@ -4,11 +4,21 @@ import FormInput from './FormInput';
 export default function Form({ data, onChangeForm }) {
   const { capital, intRate, term } = data;
 
-  const handleChangeCapital = ({ target }) => {};
+  const handleChangeCapital = ({ target }) => {
+    const value = parseFloat(target.value, 10);
+    onChangeForm(value, null, null);
+  };
 
-  const handleChangeIntRate = ({ target }) => {};
+  const handleChangeIntRate = ({ target }) => {
+    const value = parseFloat(target.value, 10);
+    onChangeForm(null, value, null);
+  };
 
-  const handleChangeTerm = ({ target }) => {};
+  const handleChangeTerm = ({ target }) => {
+    const value = parseFloat(target.value, 10);
+    onChangeForm(null, null, value);
+  };
+
   return (
     <form className='col s12'>
       <div className='row'>
