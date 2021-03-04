@@ -10,22 +10,29 @@ export default function App() {
   const handleFormChange = (newCap, newIntRate, newTerm) => {
     if (newCap !== null) {
       setCapital(newCap);
+      console.log(`${capital}, ${intRate}, ${term} newCap`);
       return;
     }
     if (newIntRate !== null) {
       setIntRate(newIntRate);
+      console.log(`${capital}, ${intRate}, ${term} newInt`);
       return;
     }
     setTerm(newTerm);
+    console.log(`${capital}, ${intRate}, ${term} newTerm`);
   };
 
   return (
     <div style={style.flex}>
       <h1>React - Juros Compostos</h1>
-      <Form style={style.flexChild} onChangeForm={handleFormChange} />
+      <Form
+        style={style.flexChild}
+        data={{ capital, intRate, term }}
+        onChangeForm={handleFormChange}
+      />
       <InstallmentGroup
         style={style.flexChild}
-        cashFlow={(capital, intRate, term)}
+        cashFlow={{ capital, intRate, term }}
       />
     </div>
   );
