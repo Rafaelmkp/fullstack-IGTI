@@ -7,16 +7,16 @@ export default function InstallmentGroup({ cashFlow }) {
 
   console.log(`${capital} ${intRate} ${term} installment`);
   const cashData = calculator(capital, intRate, term);
-  // console.log(cashData[0]);
+  console.log(cashData);
   return (
     <div>
       {/* each element in cashData is a single installment */}
-      {cashData.forEach(({ amount, interest, term }) => {
+      {cashData.map(({ amount, interest, term }) => {
         return (
           <Installment
             key={term}
-            style={style.installmBox}
             term={term}
+            interest={interest}
             amount={amount}
           />
         );
@@ -24,11 +24,3 @@ export default function InstallmentGroup({ cashFlow }) {
     </div>
   );
 }
-
-const style = {
-  installmBox: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '10px',
-  },
-};
