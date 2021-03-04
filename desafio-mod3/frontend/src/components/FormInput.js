@@ -6,13 +6,9 @@ export default function FormInput({
   min,
   step,
   labelDesc,
-  // value,
+  value,
   onChange,
 }) {
-  const handleChange = (event) => {
-    onChange(event.target.value);
-  };
-
   return (
     <div className='input-field col s6'>
       <input
@@ -22,8 +18,8 @@ export default function FormInput({
         className='validate'
         min={min}
         step={step}
-        onChange={handleChange}
-        // value={value ? value : ''}
+        onChange={onChange}
+        value={value ? value : ''}
       />
       <label className='active' htmlFor={id}>
         {labelDesc}

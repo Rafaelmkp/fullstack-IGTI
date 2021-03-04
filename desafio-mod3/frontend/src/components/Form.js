@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import FormInput from './FormInput';
 
-export default function Form({ onChangeForm }) {
-  const [capital, setCapital] = useState();
-  const [rate, setRate] = useState();
-  const [term, setTerm] = useState();
+export default function Form({ data, onChangeForm }) {
+  const { capital, intRate, term } = data;
 
-  //tentar novamente handleFormChange s/ useEffect
+  const handleChangeCapital = ({ target }) => {};
 
-  useEffect(() => {
-    onChangeForm([capital, rate, term]);
-    console.log(`${capital}, ${rate}, ${term}`);
-  }, [capital, rate, term, onChangeForm]);
+  const handleChangeIntRate = ({ target }) => {};
 
+  const handleChangeTerm = ({ target }) => {};
   return (
     <form className='col s12'>
       <div className='row'>
@@ -23,8 +19,8 @@ export default function Form({ onChangeForm }) {
             min='0'
             step='1'
             labelDesc='Capital inicial:'
-            onChange={setCapital}
-            // value={capital}
+            onChange={handleChangeCapital}
+            value={capital}
           />
           <FormInput
             placeholder='Taxa de juros'
@@ -32,8 +28,8 @@ export default function Form({ onChangeForm }) {
             min=''
             step='0.1'
             labelDesc='Taxa de juros mensal:'
-            onChange={setRate}
-            // value={rate}
+            onChange={handleChangeIntRate}
+            value={intRate}
           />
           <FormInput
             placeholder='Período'
@@ -41,8 +37,8 @@ export default function Form({ onChangeForm }) {
             min='0'
             step='1'
             labelDesc='Período(meses):'
-            onChange={setTerm}
-            // value={term}
+            onChange={handleChangeTerm}
+            value={term}
           />
         </div>
       </div>
