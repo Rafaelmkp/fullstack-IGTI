@@ -1,5 +1,6 @@
 import React from 'react';
 import css from './installment.module.css';
+import * as formatter from '../helpers/formatters.js';
 
 export default function Installment({ term, interest, amount }) {
   console.log(`${amount} ${interest} ${term} unit`);

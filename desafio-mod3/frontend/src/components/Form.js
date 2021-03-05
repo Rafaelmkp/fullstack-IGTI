@@ -26,7 +26,7 @@ export default function Form({ data, onChangeForm }) {
           <FormInput
             placeholder='Capital inicial'
             id='init-amount'
-            min='0'
+            min='100'
             step='1'
             labelDesc='Capital inicial:'
             onChange={handleChangeCapital}
@@ -46,7 +46,7 @@ export default function Form({ data, onChangeForm }) {
             id='term'
             min='0'
             step='1'
-            labelDesc='Período(meses):'
+            labelDesc='Período (meses):'
             onChange={handleChangeTerm}
             value={term}
           />
