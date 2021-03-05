@@ -5,7 +5,7 @@ export function calcInterestArray(capital, rate, term) {
   for (let i = 1; i <= term; i++) {
     const interest = amount * (rate / 100);
     amount = amount + interest;
-    const totalRate = amount / capital;
+    const totalRate = (amount / capital - 1) * 100;
     const totalInterest = amount - capital;
     const profit = amount >= capital;
     cashFlow.push({
