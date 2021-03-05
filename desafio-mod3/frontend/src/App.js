@@ -23,34 +23,10 @@ export default function App() {
   };
 
   return (
-    <div style={style.flex}>
-      <h1>React - Juros Compostos</h1>
-      <Form
-        style={style.flexChild}
-        data={{ capital, intRate, term }}
-        onChangeForm={handleFormChange}
-      />
-      <InstallmentGroup
-        style={style.flexChild}
-        cashFlow={{ capital, intRate, term }}
-      />
+    <div className='container center'>
+      <h1 className='center'>React - Juros Compostos</h1>
+      <Form data={{ capital, intRate, term }} onChangeForm={handleFormChange} />
+      <InstallmentGroup cashFlow={{ capital, intRate, term }} />
     </div>
   );
 }
-
-/**
- * >>STYLE<<
- */
-const style = {
-  flex: {
-    display: 'flex',
-    justifyContent: 'center',
-    textAlign: 'center',
-    flexDirection: 'column',
-    margin: '15px',
-  },
-
-  flexChild: {
-    padding: '10px',
-  },
-};

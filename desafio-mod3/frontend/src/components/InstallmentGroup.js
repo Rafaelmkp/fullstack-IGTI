@@ -9,15 +9,17 @@ export default function InstallmentGroup({ cashFlow }) {
   const cashData = calculator(capital, intRate, term);
   console.log(cashData);
   return (
-    <div>
+    <div className='row'>
       {/* each element in cashData is a single installment */}
-      {cashData.map(({ amount, interest, term }) => {
+      {cashData.map(({ amount, term, totalRate, totalInterest, profit }) => {
         return (
           <Installment
             key={term}
             term={term}
-            interest={interest}
             amount={amount}
+            interest={totalInterest}
+            rate={totalRate}
+            profit={profit}
           />
         );
       })}
