@@ -1,12 +1,11 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import accRouter from './routes/accountsRouter.js';
 
 dotenv.config();
 
-const app = express();
-app.use(express.json());
-// app.use();
+global.FILEACC = 'accounts-2.json';
 
 const uri =
 	'mongodb+srv://' +
@@ -21,11 +20,13 @@ const uri =
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		});
-		console.log('Conectado ao MONGODB');
+		console.log('App conectado ao MONGODB');
 	} catch (err) {
-		console.log('Erro ao conectar');
-		console.log(`${process.env.USERDB} - ${process.env.PWDDB}`);
+		console.log('App - erro ao conectar');
 	}
 })();
 
-app.listen(3000, () => console.log('API Iniciada'));
+const app = express();
+app.use(express.json());
+app.use('/account', accRouter);
+app.listen(process.env.PORT, () => console.log('API Iniciada'));
