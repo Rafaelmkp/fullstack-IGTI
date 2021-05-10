@@ -12,17 +12,17 @@ Repository destinated to practical activities developed in the Fullstack Bootcam
 
 ## Conteúdo do Bootcamp
 
-O bootcamp teve duração aproximada de 100 horas e é composto dos seguintes módulos:
+This bootcamp had an aproximate duration of 100 hours. It's composed by the following modules:
 
 1. JavaScript
 
-   - Sintaxe básica de HTML e CSS
-   - Sintaxe básica da linguagem
-   - Foco em métodos com arrays
+   - HTML and CSS - Basic Syntax
+   - JavaScript - Basic Syntax
+   - Focused on array methods
 
 2. NodeJS
 
-   - Conceitos básicos
+   - Basic concepts
    - Utilização do NPM e dependências
    - Módulos nativos
    - Winston (para logs)
@@ -37,7 +37,7 @@ O bootcamp teve duração aproximada de 100 horas e é composto dos seguintes m�
    - Hooks
    - Métodos de estado
 
-4. MongoDB, Git e Heroku
+4. MongoDB, Git and Heroku
    - Conceituação do banco
    - Comandos de inserção, deleção e manipulação de dados
    - Comandos de consulta
@@ -45,3 +45,20 @@ O bootcamp teve duração aproximada de 100 horas e é composto dos seguintes m�
    - Mongoose
    - Comandos essenciais para Git
    - Deploy com Heroku
+
+## Lista de exercícios práticos
+
+1. Module 1 - JavaScript
+   - [Practical Exercise](/trab-pratico-mod1)
+   - [Challenge](/desafio-mod1)
+2. Module 2 - NodeJS
+   - [Practical Exercise](/trab-pratico-mod2)
+   - [Challenge](/desafio-mod2)
+3. Module 3 - ReactJS
+   - [Practical Exercise](/trab-pratico-mod3)
+   - [Challenge](/desafio-mod3)
+4. Module 4 - MongoDB, Git and Heroku
+   - [Practical Exercise](/trab-pratico-mod4)
+   - [Challenge](/desafio-mod4)
+5. Final Challenge
+   - [Final Challenge](/desafio-final)
