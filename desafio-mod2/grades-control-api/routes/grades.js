@@ -80,7 +80,7 @@ router.delete('/delete-grade/:id', async (req, res, next) => {
     const isIndex = data.grades.findIndex((grade) => {
       grade.id === req.params.id;
     });
-    if (index === -1) {
+    if (isIndex === -1) {
       throw new Error('Registro não encontrado.');
     }
     const deletedGrade = data[req.params.id];
