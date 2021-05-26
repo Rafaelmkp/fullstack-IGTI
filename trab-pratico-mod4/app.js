@@ -1,9 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import accountModel from './models/accountModel.js';
 import accRouter from './routes/accountsRouter.js';
-import db from './models/index.js';
+import { db } from './models/index.js';
 
 dotenv.config();
 
