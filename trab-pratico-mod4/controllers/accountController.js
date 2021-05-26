@@ -56,7 +56,17 @@ export async function withdraw(req, res, next) {
 }
 
 //item 6
-export async function checkBalance(req, res, next) {}
+export async function checkBalance(req, res, next) {
+  const { agencia, conta } = req.params;
+
+  try {
+    const balance = await getAccountIfExists({ agencia, conta });
+    res.send(balance);
+  } catch (err) {
+    err.meessage += '- erro ao consultar saldo';
+    next(err);
+  }
+}
 
 //item 7
 export async function excludeAccount(req, res, next) {}
