@@ -22,12 +22,12 @@ export async function deposit(req, res, next) {
   const account = req.body;
 
   try {
-    let deposit = await getAccountIfExists(account);
-    deposit.balance += account.balance;
-    deposit = new Account(deposit);
-    await deposit.save();
+    let deposited = await getAccountIfExists(account);
+    deposited.balance += account.balance;
+    deposited = new Account(deposited);
+    await deposited.save();
 
-    res.send(deposit);
+    res.send(deposited);
   } catch (err) {
     err.message = 'Erro ao depositar';
     next(err);
@@ -39,16 +39,16 @@ export async function withdraw(req, res, next) {
   const account = req.body;
 
   try {
-    let draw = await getAccountIfExists(account);
+    let drawed = await getAccountIfExists(account);
 
-    draw.balance -= account.balance + BANK_WITHDRAW_TAX;
-    if (draw.balance < 0) {
+    drawed.balance -= account.balance + BANK_WITHDRAW_TAX;
+    if (drawed.balance < 0) {
       throw new Error('Saldo insuficiente');
     }
 
-    draw = new Account(draw);
-    await draw.save();
-    res.send(draw);
+    drawed = new Account(drawed);
+    await drawed.save();
+    res.send(drawed);
   } catch (err) {
     err.message += ' - erro ao sacar.';
     next(err);
@@ -69,7 +69,23 @@ export async function checkBalance(req, res, next) {
 }
 
 //item 7
-export async function excludeAccount(req, res, next) {}
+export async function excludeAccount(req, res, next) {
+  const account = req.body;
+
+  try {
+    let excluded = await getAccountIfExists(account);
+    await Account.findByIdAndRemove({ _id: excluded._id });
+
+    let accountsNumber = await Account.find({
+      agencia: excluded.agencia,
+    }).countDocuments();
+
+    res.send({ totalAccounts: accountsNumber });
+  } catch (err) {
+    err.message += ' - erro ao excluir conta.';
+    next(err);
+  }
+}
 
 //item 8
 export async function transferValue(req, res, next) {}
