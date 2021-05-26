@@ -12,4 +12,4 @@ db.url =
 db.mongoose = mongoose;
 db.account = accountModel(mongoose);
 
-export default { db };
+export { db };
