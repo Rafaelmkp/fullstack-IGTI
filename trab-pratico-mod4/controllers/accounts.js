@@ -1,11 +1,13 @@
-import express from 'express';
+import db from '../models/index.js';
+
+const Account = db.account;
 
 export async function loadData(_req, res, next) {
   try {
     const initialData = JSON.parse(await readFile(global.FILEACC));
 
     for (const account of initialData) {
-      const newAcc = new accountModel(account);
+      const newAcc = new Account(account);
       await newAcc.save();
     }
 
@@ -17,9 +19,19 @@ export async function loadData(_req, res, next) {
 
 //item 4
 export async function deposit(req, res, next) {
-  //params: valor, agencia e conta
-  //validar se conta existe
-  //atualizar balance
+  const account = req.body;
+
+  try {
+    let deposit = await getAccountIfExists(account);
+    deposit.balance += account.balance;
+    deposit = new Account(deposit);
+    await deposit.save();
+
+    res.send(deposit);
+  } catch (err) {
+    err.message = 'Erro ao depositar';
+    next(err);
+  }
 }
 
 //item 5
@@ -45,3 +57,23 @@ export async function checkWealthierClients(req, res, next) {}
 
 //item 12
 export async function transferClientsToPrivate(req, res, next) {}
+
+const getAccountIfExists = async (account) => {
+  const { agencia, conta } = account;
+  account = {
+    agencia,
+    conta,
+  };
+  try {
+    if (typeof account.agencia !== 'undefined') {
+      account = await Account.findOne(account);
+    } else {
+      account = await Account.findOne({ conta: account.conta });
+    }
+    if (!account) {
+      throw new Error(`(${agencia}/${conta}) agencia/conta invalida`);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
