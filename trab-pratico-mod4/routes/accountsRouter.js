@@ -1,8 +1,7 @@
 import express from 'express';
-import accountModel from '.././models/accountModel.js';
 import dotenv from 'dotenv';
 import { promises as fs } from 'fs';
-import * as accController from '../controllers/accounts.js';
+import * as accController from '../controllers/accountController.js';
 
 dotenv.config();
 
