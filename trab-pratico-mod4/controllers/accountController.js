@@ -1,4 +1,4 @@
-import { db, BANK_WITHDRAW_TAX } from '../models/index.js';
+import { db } from '../models/index.js';
 
 const Account = db.account;
 
@@ -41,7 +41,7 @@ export async function withdraw(req, res, next) {
   try {
     let drawed = await getAccountIfExists(account);
 
-    drawed.balance -= account.balance + BANK_WITHDRAW_TAX;
+    drawed.balance -= account.balance + global.BANK_WITHDRAW_TAX;
     if (drawed.balance < 0) {
       throw new Error('Saldo insuficiente');
     }
@@ -88,7 +88,36 @@ export async function excludeAccount(req, res, next) {
 }
 
 //item 8
-export async function transferValue(req, res, next) {}
+export async function transferValue(req, res, next) {
+  const account = req.body;
+  const transfered = account.valor;
+
+  try {
+    let sourceAcc = await getAccountIfExists({ conta: account.contaOrigem });
+    let targetAcc = await getAccountIfExists({ conta: account.contaDestino });
+
+    if (sourceAcc.agencia !== targetAcc.agencia) {
+      sourceAcc.balance -= global.BANK_TRANSFER_TAX;
+    }
+    sourceAcc.balance -= transfered;
+
+    if (sourceAcc.balance < 0) {
+      throw new Error('Saldo insuficiente.');
+    }
+
+    targetAcc.balance += transfered;
+
+    sourceAcc = new Account(sourceAcc);
+    await sourceAcc.save();
+    targetAcc = new Account(targetAcc);
+    await targetAcc.save();
+
+    res.send(sourceAcc);
+  } catch (err) {
+    err.message += ' - erro ao realizar transferencia.';
+    next(err);
+  }
+}
 
 //item 9
 export async function checkAvgBalance(req, res, next) {}
