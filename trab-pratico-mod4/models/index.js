@@ -12,6 +12,7 @@ db.url =
 db.mongoose = mongoose;
 db.account = accountModel(mongoose);
 
-const BANK_WITHDRAW_TAX = 1;
+global.BANK_WITHDRAW_TAX = 1;
+global.BANK_TRANSFER_TAX = 8;
 
-export { db, BANK_WITHDRAW_TAX };
+export { db };
